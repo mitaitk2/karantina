@@ -40,116 +40,148 @@
             background: #111;
             border: 1px solid #333;
             padding: 20px;
+            width: 100%;<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karantina System | Modüler Panel</title>
+    <style>
+        /* GENEL TEMA */
+        body {
+            background-color: #0b0b0b;
+            color: #eeeeee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+            gap: 25px; /* Kutular arasındaki boşluk */
+        }
+
+        /* ORTAK KUTU STİLİ */
+        .karantina-card {
+            background: #151515;
+            border: 1px solid #222;
             width: 100%;
             max-width: 700px;
             border-radius: 12px;
-            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            overflow: hidden;
         }
-        .stat-box { text-align: center; }
-        .stat-label { display: block; color: #555; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
-        .stat-value { font-size: 26px; font-weight: 800; color: #fff; }
-        .online-dot { color: #43b581; } /* Yeşil aktif rengi */
 
-        /* 3. BUTONLAR (DAVET & BOT) */
-        .section-actions {
+        /* 1. PARTNERLİK KUTUSU */
+        .partner-box {
+            border-left: 6px solid #ff0000;
+            padding: 25px;
+        }
+        .partner-header { color: #666; font-size: 13px; font-weight: bold; margin-bottom: 10px; }
+        .partner-title { margin: 10px 0; font-size: 22px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .partner-title a { color: #ff0000; text-decoration: none; font-weight: 800; }
+        .partner-desc { color: #bbb; line-height: 1.6; font-style: italic; margin-top: 15px; }
+
+        /* 2. İSTATİSTİK KUTUSU */
+        .stats-box {
             display: flex;
-            gap: 20px;
-            width: 100%;
-            max-width: 700px;
+            justify-content: space-around;
+            padding: 25px;
+            background: linear-gradient(145deg, #151515, #111);
+        }
+        .stat-group { text-align: center; }
+        .stat-label { display: block; color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        .stat-num { font-size: 28px; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        .active-text { color: #43b581; }
+
+        /* 3. BUTON KUTUSU */
+        .actions-box {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: #1a1a1a;
         }
         .btn {
             flex: 1;
-            padding: 18px;
+            padding: 16px;
             text-align: center;
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            border-radius: 6px;
+            transition: 0.3s;
             text-transform: uppercase;
+            font-size: 14px;
         }
-        .btn-discord {
-            background: #5865f2;
-            color: white;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
-        }
-        .btn-bot {
-            background: #ffffff;
-            color: #000;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-        }
-        .btn:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.1);
-        }
+        .btn-discord { background: #5865f2; color: white; }
+        .btn-bot { background: #ffffff; color: #000; }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
-        /* ALT BİLGİ */
-        .mentions { margin-top: 20px; color: #444; font-size: 12px; }
+        /* ETİKETLER */
+        .mentions-box {
+            background: transparent;
+            border: none;
+            color: #444;
+            font-size: 12px;
+            text-align: center;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
 
-    <div class="section-partner">
-        <div class="partner-header">** [K A R A N T I N A & @YENIDEN][<a href="https://discord.gg/karantina" style="color: #666; text-decoration: none;">discord.gg/karantina</a>] **</div>
-        
+    <div class="karantina-card partner-box">
+        <div class="partner-header">** [K A R A N T I N A & @YENIDEN][<a href="https://discord.gg/karantina" style="color:#666; text-decoration:none;">discord.gg/karantina</a>] **</div>
         <h1 class="partner-title">
             ⤹ <a href="https://discord.gg/karantina">KARANTINA & @YENIDEN</a> Sunucusuna Katil!?
         </h1>
-
         <p class="partner-desc">
             ** <code>👑</code>﹕✶⋆.˚﹕K A R A N T I N A sunucumuz toplum icerisinde Kara Mizah sunucusu olarak geçen bir sunucudur adaletin adresidir**
         </p>
     </div>
 
-    <div class="section-stats">
-        <div class="stat-box">
-            <span class="stat-label">Durum</span>
-            <span id="st-status" class="stat-value online-dot">AKTİF</span>
+    <div class="karantina-card stats-box">
+        <div class="stat-group">
+            <span class="stat-label">Üyeler</span>
+            <span id="st-status" class="stat-num active-text">AKTİF</span>
         </div>
-        <div class="stat-box">
-            <span class="stat-label">Çevrimiçi Üye</span>
-            <span id="st-online" class="stat-value">0</span>
+        <div class="stat-group">
+            <span class="stat-label">Çevrimiçi</span>
+            <span id="st-online" class="stat-num">0</span>
         </div>
-        <div class="stat-box">
+        <div class="stat-group">
             <span class="stat-label">Sesli Üye</span>
-            <span id="st-voice" class="stat-value">0</span>
+            <span id="st-voice" class="stat-num">0</span>
         </div>
     </div>
 
-    <div class="section-actions">
+    <div class="karantina-card actions-box">
         <a href="https://discord.gg/karantina" target="_blank" class="btn btn-discord">SUNUCUYA KATIL</a>
         <a href="https://discord.com/oauth2/authorize?client_id=1452704409233653962" target="_blank" class="btn btn-bot">BOTU DAVET ET</a>
     </div>
 
-    <div class="mentions">[||@everyone||] • [||@here||]</div>
+    <div class="mentions-box">
+        Her Hakkı Saklıdır
+    </div>
 
     <script>
-        // Sunucu ID'si
         const DISCORD_SERVER_ID = "1403472039670583487"; 
 
-        async function fetchDiscordData() {
+        async function updateStats() {
             try {
-                const response = await fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`);
-                const data = await response.json();
-
-                // Çevrimiçi sayısını güncelle
-                document.getElementById('st-online').innerText = data.presence_count;
-
-                // Ses kanalındakileri say
+                const res = await fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`);
+                const data = await res.json();
+                document.getElementById('st-online').innerText = data.presence_count || 0;
                 if (data.members) {
-                    const inVoice = data.members.filter(m => m.channel_id).length;
-                    document.getElementById('st-voice').innerText = inVoice;
+                    const voice = data.members.filter(m => m.channel_id).length;
+                    document.getElementById('st-voice').innerText = voice;
                 }
-            } catch (error) {
-                console.error("Widget verisi alınamadı kanka!");
+            } catch (e) {
                 document.getElementById('st-status').innerText = "HATA";
                 document.getElementById('st-status').style.color = "red";
             }
         }
 
-        // İlk yükleme ve 30 saniyede bir otomatik yenileme
-        fetchDiscordData();
-        setInterval(fetchDiscordData, 30000);
+        updateStats();
+        setInterval(updateStats, 30000);
     </script>
 
 </body>
