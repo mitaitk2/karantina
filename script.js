@@ -1,17 +1,13 @@
 const root = document.getElementById('root');
 
-function renderApp(data = null) {
-    const onlineCount = data ? data.presence_count : "...";
-    const members = data ? (data.members || []) : [];
-    const voiceCount = members.filter(m => m.channel_id).length;
-
+function renderApp() {
     root.innerHTML = `
         <div class="space-y-6 animate-in fade-in duration-700">
             <div class="glass border border-zinc-800 p-8 rounded-[2rem] relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-4">
-                    <div class="flex items-center gap-2 bg-red-600/10 px-3 py-1 rounded-full border border-red-600/20">
-                        <div class="w-2 h-2 bg-red-600 rounded-full status-online"></div>
-                        <span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">Sistem Aktif</span>
+                    <div class="flex items-center gap-2 bg-green-600/10 px-3 py-1 rounded-full border border-green-600/20">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-[10px] font-bold text-green-500 uppercase tracking-tighter">Sistem Aktif</span>
                     </div>
                 </div>
                 
@@ -26,18 +22,18 @@ function renderApp(data = null) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="glass border border-zinc-800 p-6 rounded-3xl flex justify-between items-center">
                     <div>
-                        <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Aktif Üye</p>
-                        <h3 class="text-3xl font-black">${onlineCount}</h3>
+                        <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Durum</p>
+                        <h3 class="text-3xl font-black text-green-500">ÇEVRİMİÇİ</h3>
                     </div>
-                    <div class="text-3xl text-red-600/20">👥</div>
+                    <div class="text-3xl text-green-600/20">🟢</div>
                 </div>
                 
                 <div class="glass border border-zinc-800 p-6 rounded-3xl flex justify-between items-center">
                     <div>
-                        <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Sesteki Ekip</p>
-                        <h3 class="text-3xl font-black text-red-600">${voiceCount}</h3>
+                        <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Erişim</p>
+                        <h3 class="text-3xl font-black text-white">AÇIK</h3>
                     </div>
-                    <div class="text-3xl text-red-600/20">🎙️</div>
+                    <div class="text-3xl text-white/10">🚀</div>
                 </div>
             </div>
 
@@ -57,17 +53,4 @@ function renderApp(data = null) {
     `;
 }
 
-// Veri Çekme Motoru
-async function update() {
-    try {
-        const res = await fetch('https://discord.com/api/guilds/1403472039670583487/widget.json');
-        const data = await res.json();
-        renderApp(data);
-    } catch (e) {
-        renderApp(); // Hata olsa da boş halini çiz
-    }
-}
-
-// Başlat
-update();
-setInterval(update, 10000); // 10 saniyede bir otomatik güncelleme
+renderApp();
