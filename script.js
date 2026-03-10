@@ -1,14 +1,11 @@
-/* KARANTINA SYSTEM V3.0 - FULL JS EDITION
-   Duyuruyu değiştirmek için aşağıyı güncelle kanka!
-*/
 
 const config = {
-    title: "KARANTİNA",
+    title: "B U L G A R",
     subtitle: "Adaletin adresi, kara mizahın merkezi.",
     lastAnnouncement: "Sunucumuzda yeni etkinlikler başlıyor! Katılmak için discord kanalımızı takipte kalın.",
     serverStatus: "ÇEVRİMİÇİ",
     version: "V 3.0",
-    discordLink: "https://discord.gg/karantina"
+    discordLink: "https://discord.gg/bulgar"
 };
 
 const app = document.getElementById('app');
@@ -53,7 +50,7 @@ function renderSite() {
 
                 <footer class="text-center">
                     <p class="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.4em]">
-                        Karantina © 2026 • Tüm Hakları Saklıdır
+                        B U L G A R © 2026 • Tüm Hakları Saklıdır
                     </p>
                 </footer>
 
